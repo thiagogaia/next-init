@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useEffect, useState } from "react";
+import { create } from '@/app/dashboard/posts-client/actionsServer'
 export default function PageTeste() {
   const [posts, setPosts] = useState([])
   useEffect(() => {
@@ -17,11 +18,16 @@ export default function PageTeste() {
     .then(data => setPosts(data.posts))
   }, [])
   
+  function armandinhoEhOTerror() {
+    create()
+    console.log('bahmeo')
+  }
   return (
     <>
       <h1>Todos os posts</h1>
       <div>bah meo é o gremio neh</div>
       <Button onClick={() => alert("BAH. Armandinho é o terror neh meo.")}>alert do nada para component client</Button>
+      <Button variant={'outline'} onClick={armandinhoEhOTerror}>o meuzinho;</Button>
       <>
         {posts.map((post: any) => (
           <Card key={post.id}>
