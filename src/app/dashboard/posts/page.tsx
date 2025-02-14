@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
 export const metadata: Metadata = {
   title: "O gremio",
   description: "o trem funfa.",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
   },
 };
 
-interface PostProps {
+export interface PostProps {
   id: number;
   title: string;
   body: string;
@@ -55,7 +56,7 @@ interface ResponseProps {
 export default async function PostsPage() {
   const response = await fetch("https://dummyjson.com/posts");
   const data: ResponseProps = await response.json();
-  console.log("📢 [page.tsx:36]", 'LOAD');
+  console.log("📢 [page.tsx:36]", "LOAD");
   async function handleServer() {
     "use server";
     console.log("server do nada");
@@ -67,8 +68,8 @@ export default async function PostsPage() {
 
   async function handleSearchUsers(formData: FormData) {
     "use server";
-    const userId = formData.get('userId')
-    console.log(userId, 'fala sério...');
+    const userId = formData.get("userId");
+    console.log(userId, "fala sério...");
     const response = await fetch("https://dummyjson.com/posts/user/" + userId);
     const data: ResponseProps = await response.json();
   }
@@ -87,7 +88,11 @@ export default async function PostsPage() {
         </CardHeader>
         <CardContent>
           <form action={handleSearchUsers} className="space-y-8">
-            <Input type="text" placeholder="busca então quero vê" name="userId" />
+            <Input
+              type="text"
+              placeholder="busca então quero vê"
+              name="userId"
+            />
             <Button type="submit" variant={"secondary"}>
               envia
             </Button>
@@ -108,6 +113,9 @@ export default async function PostsPage() {
           </CardHeader>
           <CardContent>
             <p>{post.body}</p>
+            <Button variant={"outline"} asChild>
+              <Link href={"/dashboard/posts/" + post.id}>vai pro post</Link>
+            </Button>
           </CardContent>
           <CardFooter>
             <p>usuario: {post.userId}</p>
