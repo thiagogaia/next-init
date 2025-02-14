@@ -71,7 +71,7 @@ const data = {
         },
         {
           title: "Posts [Client]",
-          url: "/dashboard/teste",
+          url: "/dashboard/posts-client",
         },
       ],
     },
