@@ -15,6 +15,7 @@ export default async function DatailPage({
 }) {
   const { id } = await params;
 
+  await new Promise(resolve => setTimeout(resolve, 2000))
   const response = await fetch("https://dummyjson.com/posts/" + id);
   const post: PostProps = await response.json();
   return (
