@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -20,6 +21,7 @@ export default function PageTeste() {
     <>
       <h1>Todos os posts</h1>
       <div>bah meo é o gremio neh</div>
+      <Button onClick={() => alert("BAH. Armandinho é o terror neh meo.")}>alert do nada para component client</Button>
       <>
         {posts.map((post: any) => (
           <Card key={post.id}>
