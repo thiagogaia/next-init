@@ -7,6 +7,9 @@ import {
   Card,
 } from "@/components/ui/card";
 import { PostProps } from "../page";
+import { Suspense } from "react";
+import { Heading1 } from "lucide-react";
+import Post from "./post";
 
 export default async function DatailPage({
   params,
@@ -15,24 +18,14 @@ export default async function DatailPage({
 }) {
   const { id } = await params;
 
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  const response = await fetch("https://dummyjson.com/posts/" + id);
-  const post: PostProps = await response.json();
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   return (
     <div>
       <h1>detalhe do post: {id}</h1>
-      <Card key={post.id}>
-        <CardHeader>
-          <CardTitle>{post.title}</CardTitle>
-          <CardDescription>BAH MEO</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>{post.body}</p>
-        </CardContent>
-        <CardFooter>
-          <p>usuario: {post.userId}</p>
-        </CardFooter>
-      </Card>
+      <Suspense fallback={<h1>carregando do suspense.. Streaming!</h1>}>
+        <Post id={id} />
+      </Suspense>
     </div>
   );
 }
