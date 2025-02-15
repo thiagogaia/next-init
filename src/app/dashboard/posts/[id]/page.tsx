@@ -1,14 +1,6 @@
-import {
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Card,
-} from "@/components/ui/card";
-import { PostProps } from "../page";
+
 import { Suspense } from "react";
-import { Heading1 } from "lucide-react";
+
 import Post from "./post";
 
 export default async function DatailPage({

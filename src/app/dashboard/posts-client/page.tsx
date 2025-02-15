@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { create } from '@/app/dashboard/posts-client/actionsServer'
+import { PostProps } from "../posts/page";
 export default function PageTeste() {
   const [posts, setPosts] = useState([])
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function PageTeste() {
       <Button onClick={() => alert("BAH. Armandinho é o terror neh meo.")}>alert do nada para component client</Button>
       <Button variant={'outline'} onClick={armandinhoEhOTerror}>o meuzinho;</Button>
       <>
-        {posts.map((post: any) => (
+        {posts.map((post: PostProps) => (
           <Card key={post.id}>
             <CardHeader>
               <CardTitle>{post.title}</CardTitle>

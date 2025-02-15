@@ -1,10 +1,10 @@
-import Link from "next/link"
+
 
 // import { Icons } from "@/components/icons"
 // import { ModeSwitcher } from "@/components/mode-switcher"
-import { Button } from "./ui/button"
+
 import { ModeSwitcher } from "./mode-switcher"
-import { Icons } from "./icons"
+
 
 
 export function SiteHeader() {

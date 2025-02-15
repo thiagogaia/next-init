@@ -41,9 +41,9 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
 
-  function handleLogout() {
+  /* function handleLogout() {
     
-  }
+  } */
   return (
     <SidebarMenu>
       <SidebarMenuItem>

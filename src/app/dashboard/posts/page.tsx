@@ -9,17 +9,9 @@ import {
 } from "@/components/ui/card";
 import ButtonClient from "@/components/button-client";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
-import { Loader2 } from "lucide-react";
+
 import Link from "next/link";
 export const metadata: Metadata = {
   title: "O gremio",
@@ -54,7 +46,12 @@ interface ResponseProps {
 }
 
 export default async function PostsPage() {
-  const response = await fetch("https://dummyjson.com/posts");
+  const response = await fetch("https://dummyjson.com/posts", {
+    cache: 'force-cache',
+    next: {
+      revalidate: 60
+    }
+  });
   const data: ResponseProps = await response.json();
   console.log("📢 [page.tsx:36]", "LOAD");
   async function handleServer() {
@@ -62,7 +59,7 @@ export default async function PostsPage() {
     console.log("server do nada");
     const response = await fetch("https://dummyjson.com/posts");
     const data: ResponseProps = await response.json();
-    // console.log("📢 [page.tsx:53]", data);
+    console.log("📢 [page.tsx:53]", data);
     // alert('bah')
   }
 
@@ -72,6 +69,7 @@ export default async function PostsPage() {
     console.log(userId, "fala sério...");
     const response = await fetch("https://dummyjson.com/posts/user/" + userId);
     const data: ResponseProps = await response.json();
+    console.log('📢 [page.tsx:72]', data);
   }
   return (
     <>
