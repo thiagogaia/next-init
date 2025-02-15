@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { PostProps } from "../page";
 
 export default async function Post({id}: {id: string}) {
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  await new Promise(resolve => setTimeout(resolve, 2000))
   const response = await fetch("https://dummyjson.com/posts/" + id);
   const post: PostProps = await response.json();
   return (

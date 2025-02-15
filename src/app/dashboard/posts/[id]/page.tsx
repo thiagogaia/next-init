@@ -15,7 +15,7 @@ export default async function DatailPage({
   return (
     <div>
       <h1>detalhe do post: {id}</h1>
-      <Suspense fallback={<h1>carregando do suspense.. Streaming!</h1>}>
+      <Suspense fallback={<h1 className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">carregando do suspense.. Streaming!</h1>}>
         <Post id={id} />
       </Suspense>
     </div>
