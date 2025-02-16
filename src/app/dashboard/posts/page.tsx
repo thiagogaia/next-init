@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import Link from "next/link";
+import ButtonSAve from "@/components/button-save";
 export const metadata: Metadata = {
   title: "O gremio",
   description: "o trem funfa.",
@@ -43,6 +44,7 @@ export interface PostProps {
 
 interface ResponseProps {
   posts: PostProps[];
+  message: string;
 }
 
 export default async function PostsPage() {
@@ -91,16 +93,17 @@ export default async function PostsPage() {
               placeholder="busca então quero vê"
               name="userId"
             />
-            <Button type="submit" variant={"secondary"}>
+            {/* <Button type="submit" variant={"secondary"}>
               envia
-            </Button>
+            </Button> */}
+            <ButtonSAve />
             {/* <Button disabled>
               <Loader2 className="animate-spin" />
               Please wait
             </Button> */}
           </form>
         </CardContent>
-        <CardFooter>tenso</CardFooter>
+        <CardFooter>tenso: {data.message}</CardFooter>
       </Card>
 
       {data.posts.map((post) => (
