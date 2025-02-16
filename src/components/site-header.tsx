@@ -3,6 +3,7 @@
 // import { Icons } from "@/components/icons"
 // import { ModeSwitcher } from "@/components/mode-switcher"
 
+import { LanguageSwitcher } from "@/i18n/language-switcher"
 import { ModeSwitcher } from "./mode-switcher"
 
 
@@ -15,9 +16,10 @@ export function SiteHeader() {
           
           <div className="flex flex-1 items-center justify-between gap-2 md:justify-end">
             
-            <nav className="flex items-center">
+            <nav className="flex items-center gap-2">
               
               <ModeSwitcher />
+              <LanguageSwitcher />
             </nav>
           </div>
         </div>
