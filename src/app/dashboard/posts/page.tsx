@@ -14,6 +14,9 @@ import { Input } from "@/components/ui/input";
 
 import Link from "next/link";
 import ButtonSAve from "@/components/button-save";
+import FormList from "./form-list";
+import { Suspense } from "react";
+import FormList2 from "./form-list2";
 export const metadata: Metadata = {
   title: "O gremio",
   description: "o trem funfa.",
@@ -42,19 +45,20 @@ export interface PostProps {
   userId: string;
 }
 
-interface ResponseProps {
+export interface ResponseProps {
   posts: PostProps[];
   message: string;
+  total: number;
 }
 
 export default async function PostsPage() {
-  const response = await fetch("https://dummyjson.com/posts", {
+  /* const response = await fetch("https://dummyjson.com/posts", {
     cache: 'force-cache',
     next: {
       revalidate: 60
     }
   });
-  const data: ResponseProps = await response.json();
+  const data: ResponseProps = await response.json(); */
   console.log("📢 [page.tsx:36]", "LOAD");
   async function handleServer() {
     "use server";
@@ -71,7 +75,7 @@ export default async function PostsPage() {
     console.log(userId, "fala sério...");
     const response = await fetch("https://dummyjson.com/posts/user/" + userId);
     const data: ResponseProps = await response.json();
-    console.log('📢 [page.tsx:72]', data);
+    console.log("📢 [page.tsx:72]", data);
   }
   return (
     <>
@@ -81,7 +85,11 @@ export default async function PostsPage() {
       <Button onClick={handleServer} type="button">
         Botão SERVER
       </Button>
-      <Card>
+
+      <Suspense fallback={<h1>Carregando componente...</h1>}>
+        <FormList />
+      </Suspense>
+      {/* <Card>
         <CardHeader>
           <CardTitle>POSTa vei</CardTitle>
           <CardDescription>BAH MEO</CardDescription>
@@ -95,18 +103,18 @@ export default async function PostsPage() {
             />
             {/* <Button type="submit" variant={"secondary"}>
               envia
-            </Button> */}
+            </Button> *
             <ButtonSAve />
             {/* <Button disabled>
               <Loader2 className="animate-spin" />
               Please wait
-            </Button> */}
+            </Button> *
           </form>
         </CardContent>
         <CardFooter>tenso: {data.message}</CardFooter>
-      </Card>
+      </Card> */}
 
-      {data.posts.map((post) => (
+      {/* {data.posts.length && data.posts.map((post) => (
         <Card key={post.id}>
           <CardHeader>
             <CardTitle>{post.title}</CardTitle>
@@ -122,7 +130,7 @@ export default async function PostsPage() {
             <p>usuario: {post.userId}</p>
           </CardFooter>
         </Card>
-      ))}
+      ))} */}
     </>
   );
 }
