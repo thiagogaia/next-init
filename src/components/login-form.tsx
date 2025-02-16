@@ -9,16 +9,24 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LanguageSwitcher } from "@/i18n/language-switcher";
+import { useTranslations } from "next-intl";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const t = useTranslations();
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl flex justify-between items-center">
+            <div>{t('Login')}</div>
+            <div>
+              <LanguageSwitcher />
+            </div>
+          </CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
