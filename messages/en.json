@@ -2,5 +2,8 @@
   "HomePage": {
     "title": "Hello world!"
   },
-  "Login": "Login"
+  "Login": "Login",
+  "Forgot your password?": "Forgot your password?",
+  "Enter your email below to login to your account": "Enter your email below to login to your account",
+  "Password": "Password"
 }

@@ -2,5 +2,8 @@
   "HomePage": {
     "title": "Bom dia!"
   },
-  "Login": "Entrar"
+  "Login": "Entrar",
+  "Forgot your password?": "Esqueceu sua senha?",
+  "Enter your email below to login to your account": "Digite seu e-mail abaixo para fazer login em sua conta",
+  "Password": "Senha"
 }

@@ -28,7 +28,7 @@ export function LoginForm({
             </div>
           </CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {t('Enter your email below to login to your account')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -45,19 +45,19 @@ export function LoginForm({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t('Password')}</Label>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" placeholder={t('Password')} required />
               </div>
               <Button type="submit" className="w-full">
-                Login
+                {t('Login')}
               </Button>
               <div className="mt-4 text-center text-sm">
                 <a
                   href="#"
                   className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                 >
-                  Forgot your password?
+                  {t('Forgot your password?')}
                 </a>
               </div>
               {/* <Button variant="outline" className="w-full">
