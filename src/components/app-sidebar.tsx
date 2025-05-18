@@ -72,6 +72,10 @@ const data = {
           title: "Posts [Client]",
           url: "/dashboard/posts-client",
         },
+        {
+          title: "Dashboard Analytics",
+          url: "/dashboard/analytics",
+        },
       ],
     },
     {
