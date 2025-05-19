@@ -38,6 +38,7 @@ async function main() {
       { title: '🔍 Verificar - check', value: 'check' },      
       { title: '📦 Postgres up - docker-compose up -d', value: 'dockerup' },
       { title: '🗑️  Posgres down - docker-compose down', value: 'dockerdown' },
+      { title: '🗑️  Posgres Rebuild - BUILD', value: 'dockerbuild' },
       { title: '👋 Sair', value: 'exit' }
     ]
   });
@@ -97,8 +98,15 @@ async function main() {
   }
 
   if (action === 'dockerdown') {
-    log('Executando: docker-compose down -v');
+    log('Executando: docker-compose down -v --remove-orphans');
     run('docker-compose down');
+  }
+
+  if (action === 'dockerbuild') {
+    log('Executando: build');
+    run('docker-compose down -v');
+    run('docker-compose build --no-cache');
+    run('docker-compose up -d');
   }
 }
 
