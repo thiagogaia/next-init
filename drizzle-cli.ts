@@ -19,15 +19,25 @@ function run(cmd: string) {
   }
 }
 
+// Usar Migration: 
+// 1. Criar migrations: drizzle-kit generate
+// 2. Aplicar migrations: drizzle-kit migrate
+// 3. Verificar migrations: drizzle-kit check
+// 4. Reverter migrations: drizzle-kit drop
+// 5. Não usar Aplicar migrations: drizzle-kit push, pois não controla as migrations pelo banco de dados
 async function main() {
   const { action } = await prompts({
     type: 'select',
     name: 'action',
     message: 'O que você deseja fazer com o Drizzle ORM?',
     choices: [
-      { title: '🚀 Push (Aplicar mudanças e sincronizar com banco)', value: 'push' },
-      { title: '📝 Generate (Gerar migrations .sql sem aplicar)', value: 'generate' },
-      { title: '💣 Drop + Recriar banco a partir das migrations', value: 'drop' },
+      { title: '🚀 Push (Aplicar mudanças e sincronizar com banco) - push', value: 'push' },
+      { title: '📝 Generate (Gerar migrations .sql sem aplicar) - generate', value: 'generate' },
+      { title: '💣 Drop - Rollback', value: 'drop' },
+      { title: '🔄 Migrate (Aplicar migrations .sql) - migrate', value: 'migrate' },
+      { title: '🔍 Verificar - check', value: 'check' },      
+      { title: '📦 Postgres up - docker-compose up -d', value: 'dockerup' },
+      { title: '🗑️  Posgres down - docker-compose down', value: 'dockerdown' },
       { title: '👋 Sair', value: 'exit' }
     ]
   });
@@ -45,21 +55,20 @@ async function main() {
   if (action === 'generate') {
     log('Executando: drizzle-kit generate');
     run('npx drizzle-kit generate');
-    run('npx drizzle-kit migrate');
   }
 
-  if (action === 'drop') {
+  if (action === 'migrate') {
     const hasMigrations = fs.existsSync(migrationsPath) && fs.readdirSync(migrationsPath).length > 0;
 
     if (!hasMigrations) {
-      console.error('\n❌ Nenhuma migration encontrada em drizzle/migrations. Rode `generate` antes de usar drop.\n');
+      console.error('\n❌ Nenhuma migration encontrada em drizzle/migrations. Rode `generate` antes de usar migrate.\n');
       process.exit(1);
     }
 
     const confirm = await prompts({
       type: 'confirm',
       name: 'value',
-      message: 'Tem certeza que deseja DELETAR todas as tabelas e recriar do zero?',
+      message: 'Tem certeza que deseja MIGRAR e Alterar o banco?',
       initial: false,
     });
 
@@ -68,8 +77,28 @@ async function main() {
       process.exit(0);
     }
 
+    log('Executando: drizzle-kit migrate');
+    run('npx drizzle-kit migrate');
+  }
+
+  if (action === 'check') {
+    log('Executando: drizzle-kit check');
+    run('npx drizzle-kit check');
+  }
+
+  if (action === 'drop') {
     log('Executando: drizzle-kit drop');
     run('npx drizzle-kit drop');
+  }
+
+  if (action === 'dockerup') {
+    log('Executando: docker-compose up -d');
+    run('docker-compose up -d');
+  }
+
+  if (action === 'dockerdown') {
+    log('Executando: docker-compose down -v');
+    run('docker-compose down');
   }
 }
 
