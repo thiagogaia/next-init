@@ -1,8 +1,8 @@
 version: '3'
 services:
   db:
-    image: postgres:latest
-    restart: always
+    image: ankane/pgvector
+    restart: "no"
     ports:
       - 5432:5432
     environment: 
@@ -10,6 +10,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres_data:/var/lib/postgresql/data
 volumes:
   postgres_data:
